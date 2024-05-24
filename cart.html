@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <a href="description.html" style="text-decoration: none;color: red;text-align: center;font-family: poppins;font-size: 22px;font-weight: 200;"><h1 class="text-center">ADD TO CART</h1></a>
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div id="main" style="display: flex;justify-content: space-around;flex-wrap: wrap;" class="div">
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+<script>
+
+let product = [];
+function fetchdata() {
+    fetch("http://localhost:3000/cart")
+        .then((res) => res.json())
+        .then((data) => {
+            cardlist(data);
+            product = data;
+        })
+        .catch((err) => console.log(err));
+}
+
+fetchdata();
+function cardlist(data) {
+    let store = data.map((el) => singlecard(el.id, el.image, el.title, el.founder, el.category, el.price));
+    document.getElementById("main").innerHTML = store.join('');
+}
+
+// Generate a single card HTML structure
+function singlecard(id, image, title, founder, category, price) {
+    let card = ` 
+
+        <div class="card mb-3 m-auto" data-id="${id}" style="max-width: 540px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;border-radius:15px;padding:20px;>
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="${image}" class="img-fluid rounded-start" alt="file not found !">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-family:poppins;font-size:22px;">${title}</h5>
+                        <p class="card-text" style="font-family:poppins;">${founder}</p><br>
+                        <p class="card-text" style="font-family:poppins;>${category}</p><br>
+                        <p class="card-text">${price}</p>
+                        <button data-id="${id}" class="card-button" style="font-family:poppins; class="card-button">Delete</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    `;
+    return card;
+}
+
+
+
+
+document.addEventListener("click", (el) => {
+    if (el.target.classList.contains("card-button")) {
+        Dproduct(el.target.dataset.id);
+    }
+});
+
+function Dproduct(id) {
+    fetch(`http://localhost:3000/cart/${id}`, {
+        method: "DELETE",
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            fetchdata(); // Refresh the product list
+        })
+        .catch((err) => console.log(err));
+}
+
+</script>
