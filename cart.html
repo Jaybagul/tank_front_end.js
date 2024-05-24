@@ -26,7 +26,7 @@
 
 let product = [];
 function fetchdata() {
-    fetch("http://localhost:3000/cart")
+    fetch("https://tank-project-js.onrender.com/cart")
         .then((res) => res.json())
         .then((data) => {
             cardlist(data);
@@ -80,7 +80,7 @@ document.addEventListener("click", (el) => {
 });
 
 function Dproduct(id) {
-    fetch(`http://localhost:3000/cart/${id}`, {
+    fetch(`https://tank-project-js.onrender.com/cart/${id}`, {
         method: "DELETE",
     })
         .then((res) => res.json())

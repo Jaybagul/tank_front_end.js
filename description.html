@@ -75,7 +75,7 @@ document.getElementById("addToCart").addEventListener("click", (event) => {
         founder: params.get("founder")
     };
 
-    fetch("http://localhost:3000/cart", {
+    fetch("https://tank-project-js.onrender.com/cart", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

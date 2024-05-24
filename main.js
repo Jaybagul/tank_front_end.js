@@ -36,7 +36,7 @@ let filterPersonalCare = document.getElementById("filter-Personal-Care");
 
 let product = [];
 function fetchdata() {
-    fetch("http://localhost:3000/pitches")
+    fetch("https://tank-project-js.onrender.com/pitches")
         .then((res) => res.json())
         .then((data) => {
             cardlist(data);
@@ -130,7 +130,7 @@ pitchCreateBtn.addEventListener("click", () => {
         price: pitchPriceInput.value
     };
 
-    fetch("http://localhost:3000/pitches", {
+    fetch("https://tank-project-js.onrender.com/pitches", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ document.addEventListener("click", (el) => {
 });
 
 function Dproduct(id) {
-    fetch(`http://localhost:3000/pitches/${id}`, {
+    fetch(`https://tank-project-js.onrender.com/pitches/${id}`, {
         method: "DELETE",
     })
         .then((res) => res.json())
@@ -207,7 +207,7 @@ document.addEventListener("click", (el) => {
 });
 
 function update(id) {
-    fetch(`http://localhost:3000/pitches/${id}`)
+    fetch(`https://tank-project-js.onrender.com/pitches/${id}`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
@@ -232,7 +232,7 @@ updatePitchBtn.addEventListener("click", () => {
     };
     console.log(userdata);
 
-    fetch(`http://localhost:3000/pitches/${userdata.id}`, {
+    fetch(`https://tank-project-js.onrender.com/pitches/${userdata.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -257,7 +257,7 @@ updatePricePitchPriceButton.addEventListener("click", () => {
         return;
     }
 
-    fetch(`http://localhost:3000/pitches/${pitchId}`)
+    fetch(`https://tank-project-js.onrender.com/pitches/${pitchId}`)
         .then((res) => res.json())
         .then((data) => {
             if (!data) {
@@ -269,7 +269,7 @@ updatePricePitchPriceButton.addEventListener("click", () => {
                 price: newPrice
             };
 
-            fetch(`http://localhost:3000/pitches/${pitchId}`, {
+            fetch(`https://tank-project-js.onrender.com/pitches/${pitchId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
